@@ -30,7 +30,7 @@ public class Reparto implements Serializable {
     @Column(name = "fecha")
     private Date fecha;
 
-    @OneToMany(mappedBy = "reparto", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Paquete> listaPaquetes;
 
     public Reparto(int identificador, Camion camion, Camionero camionero, Date fecha) {

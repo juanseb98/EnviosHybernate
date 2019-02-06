@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.IndexColumn;
+
 /**
  *
  * @author Juan Sebastian Gonzalez Sanchez
@@ -30,7 +32,9 @@ public class Camionero implements Serializable {
     @Column(name = "salario")
     private Double salario;
 
-    @OneToMany(mappedBy = "camionero", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="dniCamionero")
+    @IndexColumn(name = "idx2")
     private List<Reparto> repartos;
 
     public Camionero(String dni, String nombre, String poblacion, int tlfn, Double salario) throws Exception {

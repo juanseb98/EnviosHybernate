@@ -9,8 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.IndexColumn;
 
 /**
  *
@@ -33,7 +36,9 @@ public class Camion {
     @Enumerated(EnumType.STRING)
     private TipoCamion tipo;
 
-    @OneToMany(mappedBy = "camion", cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name ="matriculaCamion")
+    @IndexColumn(name = "idx1")
     private List<Reparto> repartos;
 
     public Camion(String matricula, String Modelo, double potencia, TipoCamion tipo) {
