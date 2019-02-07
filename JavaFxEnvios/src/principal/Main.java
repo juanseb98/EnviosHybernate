@@ -9,49 +9,60 @@ import org.hibernate.Session;
 
 import Objetos.Camion;
 import Objetos.Camionero;
+import Objetos.Paquete;
 import Objetos.Reparto;
 import Objetos.TipoCamion;
 import ajustesHibernate.HibernateUtil;
 import dao.GenericDAO;
 
-
 public class Main {
 	private static Scanner teclado = new Scanner(System.in);
 	private static Session session;
 	private static GenericDAO genericDAO = new GenericDAO<>();
-	
 
 	public static void main(String[] args) {
 		configurarSesion();
 		try {
 			Camionero cam = new Camionero("20503879T", "Juan", "Sevilla", 697366754, 1400.0);
 			Camion cami = new Camion("123jdk", "Mercedes", 25.0, TipoCamion.Diesel);
+
+			Paquete a = new Paquete(123, "Paquete grande", "Sevilla");
+			Paquete b = new Paquete(456, "Paquete pequeño", "Malaga");
+			Paquete c = new Paquete(789, "Paquete mediano", "Alcala");
+			Paquete d = new Paquete(159, "Paquete diminuto", "Sevilla");
+			Paquete e = new Paquete(753, "Paquete enorme", "Cadiz");
+			
 			Date fecha = new Date();
 			Reparto rep = new Reparto(cami, cam, fecha);
-			
 
 			System.out.println("Que hacer?");
 			int opc = teclado.nextInt();
-			if(opc==1) {
+			if (opc == 1) {
+				
+				genericDAO.guardar(a);
+				genericDAO.guardar(b);
+				genericDAO.guardar(c);
+				genericDAO.guardar(d);
+				genericDAO.guardar(e);
+				
+				
 				genericDAO.guardar(cami);
 				genericDAO.guardar(cam);
 				genericDAO.guardar(rep);
-			}else {
+				
+			} else {
 				Query query = session.createQuery("SELECT c FROM Reparto c");
-				 List<Reparto> repartos = query.list();
-				 for (Reparto reparto : repartos) {
-				     System.out.println(reparto.toString());
-				 }
+				List<Reparto> repartos = query.list();
+				for (Reparto reparto : repartos) {
+					System.out.println(reparto.toString());
+				}
 			}
-			
-			
-			
+
 			System.out.println(" se guardo reparto");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 
 	}
 

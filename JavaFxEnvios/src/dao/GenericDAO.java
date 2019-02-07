@@ -9,7 +9,7 @@ public class GenericDAO<T> {
 
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		session.save(entidad);
+		session.saveOrUpdate(entidad);
 		session.getTransaction().commit();
 
 	}

@@ -14,7 +14,7 @@ import org.hibernate.annotations.Type;
 public class Paquete implements Serializable {
 
     @Id
-    @Column(name = "codigo_paquete")
+    @Column(name = "codigo")
     private int codigo;
 
     @Column(name = "descripcion")
@@ -49,6 +49,7 @@ public class Paquete implements Serializable {
     public Paquete() {
         super();
     }
+    
     public int getCodigo() {
         return codigo;
     }
@@ -69,7 +70,10 @@ public class Paquete implements Serializable {
         return this.entregado;
     }
 
-
+    public void setEntregado(Boolean b) {
+        this.entregado = b;
+    }
+    
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
@@ -84,6 +88,11 @@ public class Paquete implements Serializable {
 
     public void setReparto(Reparto reparto) {
         this.reparto = reparto;
+    }
+    
+    @Override
+    public String toString() {
+        return "Paquete{" + "codigo=" + codigo + ", descripcion=" + descripcion + ", destino=" + destino + ", reparto=" + reparto + '}';
     }
 
 }
