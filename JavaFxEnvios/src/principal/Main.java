@@ -1,8 +1,10 @@
 package principal;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 
 import Objetos.Camion;
@@ -17,6 +19,7 @@ public class Main {
 	private static Scanner teclado = new Scanner(System.in);
 	private static Session session;
 	private static GenericDAO genericDAO = new GenericDAO<>();
+	
 
 	public static void main(String[] args) {
 		configurarSesion();
@@ -24,11 +27,24 @@ public class Main {
 			Camionero cam = new Camionero("20503879T", "Juan", "Sevilla", 697366754, 1400.0);
 			Camion cami = new Camion("123jdk", "Mercedes", 25.0, TipoCamion.Diesel);
 			Date fecha = new Date();
-			Reparto rep = new Reparto(1, cami, cam, fecha);
+			Reparto rep = new Reparto(cami, cam, fecha);
 			
-			//genericDAO.guardar(cami);
+
+			System.out.println("Que hacer?");
+			int opc = teclado.nextInt();
+			if(opc==1) {
+				genericDAO.guardar(cami);
+				genericDAO.guardar(cam);
+				genericDAO.guardar(rep);
+			}else {
+				Query query = session.createQuery("SELECT c FROM Reparto c");
+				 List<Reparto> repartos = query.list();
+				 for (Reparto reparto : repartos) {
+				     System.out.println(reparto.toString());
+				 }
+			}
 			
-			genericDAO.guardar(rep);
+			
 			
 			System.out.println(" se guardo reparto");
 		} catch (Exception e) {

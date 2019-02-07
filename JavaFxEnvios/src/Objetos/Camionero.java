@@ -34,7 +34,7 @@ public class Camionero implements Serializable {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name ="dniCamionero")
-    @IndexColumn(name = "idx2")
+    //@IndexColumn(name = "idx2")
     private List<Reparto> repartos;
 
     public Camionero(String dni, String nombre, String poblacion, int tlfn, Double salario) throws Exception {
@@ -45,8 +45,14 @@ public class Camionero implements Serializable {
         setSalario(salario);
         repartos = new ArrayList<Reparto>();
     }
+    
 
-    //Getters
+    public Camionero() {
+		super();
+	}
+
+
+	//Getters
     public String getDni() {
         return dni;
     }
