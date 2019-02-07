@@ -35,7 +35,7 @@ CREATE TABLE paquete(
 	codigo INT AUTO_INCREMENT NOT NULL,
 	descripcion VARCHAR(20),
 	destino VARCHAR(15),
-	-- entregado TINYINT,
+	entregado TINYINT,
 	id_reparto INT,
     CONSTRAINT PK_paquete PRIMARY KEY (codigo),
 	CONSTRAINT PK_repartoPa FOREIGN KEY (id_reparto) REFERENCES reparto(id)

@@ -3,6 +3,8 @@ package Objetos;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import org.hibernate.annotations.Type;
+
 /**
  *
  * @author Juan Sebastian Gonzalez Sanchez
@@ -20,6 +22,10 @@ public class Paquete implements Serializable {
 
     @Column(name = "destino")
     private String destino;
+    
+    @Column(name = "entregado")
+    @Type(type = "boolean")
+    private Boolean entregado;
 
     @ManyToOne
     @JoinColumn(name = "id_reparto")
@@ -29,9 +35,20 @@ public class Paquete implements Serializable {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.destino = destino;
+        this.entregado = false;
         reparto = null;
     }
 
+    public Paquete(String descripcion, String destino) {
+        this.descripcion = descripcion;
+        this.destino = destino;
+        this.entregado = false;
+        reparto = null;
+    }
+
+    public Paquete() {
+        super();
+    }
     public int getCodigo() {
         return codigo;
     }
@@ -47,6 +64,11 @@ public class Paquete implements Serializable {
     public Reparto getReparto() {
         return reparto;
     }
+    
+    public boolean isEntregado() {
+        return this.entregado;
+    }
+
 
     public void setCodigo(int codigo) {
         this.codigo = codigo;
