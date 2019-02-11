@@ -31,7 +31,7 @@ public class Reparto implements Serializable {
     private Date fecha;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name ="reparto")
+    @JoinColumn(name ="id_reparto")
     private List<Paquete> listaPaquetes;
 
     public Reparto(int identificador, Camion camion, Camionero camionero, Date fecha) {
